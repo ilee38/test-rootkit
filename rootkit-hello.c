@@ -129,6 +129,24 @@ int asm_hook_create(void *original_function, void *modified_function)
 }
 
 /**
+ * Patches the original function to call the modified function again.
+ *
+ * @param modified_function Function that the original function was patched to
+ * call in asm_hook_create().
+ */
+void asm_hook_patch(void *modified_function)
+{
+    struct asm_hook *h;
+
+    list_for_each_entry(h, &asm_hook_list, list) {
+        if (h->modified_function == modified_function) {
+            _asm_hook_patch(h);
+            break;
+        }
+    }
+}
+
+/**
  * Unpatches machine code of the original function, so that it wouldn't call
  * our function anymore.
  * This function should not be called directly.
