@@ -68,7 +68,7 @@ int access_namespaces(void){
         }
         tsk_name = get_task_comm(buf_comm, task);
 	//The CFG_DOCKER_CONTAINER constant is defined in our config.h file
-        if(strcmp(tsk_name, CFG_DOCKER_CONTAINER) == 0){
+        if(strcmp(tsk_name, "docker-containe") == 0){
             pr_info("Found containerd \"%s\" with task PID: %d\n", tsk_name, task->pid);
             show_ns_pointers(task);
 	}
