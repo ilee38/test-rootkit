@@ -1,6 +1,8 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
+#include <linux/syscalls.h>
+#include <linux/version.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Iram Lee");
@@ -13,6 +15,7 @@ MODULE_VERSION("0.01");
 #if defined __x86_64__
     #define START_ADDRESS 0xffffffff81000000
     #define END_ADDRESS 0xffffffffa2000000
+#endif
 
 void **sys_call_table;
 
@@ -56,7 +59,7 @@ skip:
 // ========== END SYS_CALL_TABLE ==========
 
 static int __init lkm_example_init(void) {
-  printk(KERN_INFO “Hello, World!\n”);
+  printk(KERN_INFO "Hello, World!\n");
   /* Locate the system call table */
     sys_call_table = find_syscall_table();
     pr_info("Found sys_call_table at %p\n", sys_call_table);
