@@ -4,6 +4,7 @@
 #include <linux/syscalls.h>
 #include <linux/version.h>
 #include <linux/list.h>
+#include <linux/slab.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Iram Lee");
